@@ -56,7 +56,16 @@ fi
 
 
 # Ativar acesso ao armazenamento (exige confirmação do usuário)
-termux-setup-storage
+# Verificar e ativar acesso ao armazenamento (somente se necessário)
+if [ ! -d "$HOME/storage" ]; then
+    echo "📂 Configurando acesso ao armazenamento interno..."
+    termux-setup-storage
+    echo "✅ Acesso ao armazenamento solicitado. Reinicie o Termux se necessário."
+    sleep 2
+else
+    echo "✅ Acesso ao armazenamento interno já está configurado."
+fi
+
 
 # Criar start.sh
 cd ~/
