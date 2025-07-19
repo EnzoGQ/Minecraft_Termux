@@ -129,7 +129,7 @@ while true; do
     echo "3) Atualizar server.jar"
     echo "4) Excluir mapa do servidor"
     echo "5) Backup do servidor"
-    echo "6) Editar configurações do servidor"
+    echo "6) Editar server.properties"
     echo "0) Sair"
     echo -n "Escolha uma opção: "
     read op
