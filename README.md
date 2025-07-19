@@ -31,8 +31,34 @@ chmod +x minecraft-termux-setup.sh
 wget https://raw.githubusercontent.com/EnzoGQ/Minecraft_Termux/refs/heads/main/minecraft-termux-setup.sh -O minecraft-termux-setup.sh && chmod +x minecraft-termux-setup.sh && ./minecraft-termux-setup.sh
 ```
 
-### ▶ Como iniciar o servidor
+## ▶ Como usar o servidor
 
+**Após a instalação, o script de menu para gerenciar o servidor estará disponivel com o comando (Ele é executado automaticamente após a primeira instalação):**
 ```bash
-./start.sh
+./minecraft-termux-setup.sh
+```
+
+Você verá o seguinte menu:
+```bash
+==== MENU ====
+1) Instalar novo servidor
+2) Iniciar servidor
+3) Atualizar server.jar
+4) Excluir mapa do servidor
+5) Backup do servidor
+
+1) Instalar novo servidor
+Faz a instalação inicial do servidor Minecraft Vanilla.
+
+2) Iniciar servidor
+Inicia o servidor Minecraft já instalado.
+
+3) Atualizar server.jar
+Baixa a versão selecionada do Minecraft.
+
+4) Excluir mapa do servidor
+Apaga o mundo salvo atual para começar um mapa novo.
+
+5) Backup do servidor
+Faz um backup do diretório do servidor, incluindo mundo, configurações e arquivos.
 
