@@ -135,40 +135,59 @@ while true; do
 
     case "$op" in
     1)
-		echo ""
-		echo "📥 Selecione a versão do servidor Minecraft:"
-		
-		# Listar opções numeradas manualmente
-		echo "0) Cancelar"
-		i=1
-		declare -a opcoes
-		for ver in "${!versions[@]}"; do
-		    echo "$i) $ver"
-		    opcoes[$i]="$ver"
-		    ((i++))
-		done
-		
-		# Ler opção do usuário
-		read -p "Digite o número da versão desejada: " escolha
-		
-		# Verificar entrada
-		if [[ "$escolha" == "0" ]]; then
-		    echo "❌ Instalação cancelada."
-		elif [[ "$escolha" =~ ^[0-9]+$ ]] && [[ "$escolha" -gt 0 && "$escolha" -lt "$i" ]]; then
-		    versao_escolhida="${opcoes[$escolha]}"
-		    echo "✅ Baixando servidor da versão: $versao_escolhida"
-		
-		    mkdir -p "$SERVER_DIR"
-		    cd "$SERVER_DIR" || exit 1
-		    wget -O server.jar "${versions[$versao_escolhida]}"
-		    echo "eula=true" > eula.txt
-		else
-		    echo "❌ Opção inválida. Operação abortada."
-		fi
+        echo ""
+        echo "📥 Selecione a versão do servidor Minecraft:"
+
+        # Listar opções numeradas manualmente
+        echo "0) Cancelar"
+        i=1
+        declare -a opcoes
+        for ver in "${!versions[@]}"; do
+            echo "$i) $ver"
+            opcoes[$i]="$ver"
+            ((i++))
+        done
+
+        # Ler opção do usuário
+        read -p "Digite o número da versão desejada: " escolha
+
+        # Verificar entrada
+        if [[ "$escolha" == "0" ]]; then
+            echo "❌ Instalação cancelada."
+        elif [[ "$escolha" =~ ^[0-9]+$ ]] && [[ "$escolha" -gt 0 && "$escolha" -lt "$i" ]]; then
+            versao_escolhida="${opcoes[$escolha]}"
+            echo "✅ Baixando servidor da versão: $versao_escolhida"
+
+            # Criar diretório se ainda não existir
+            if [ ! -d "$SERVER_DIR" ]; then
+                mkdir -p "$SERVER_DIR"
+                echo "📁 Diretório criado em $SERVER_DIR"
+            fi
+
+            cd "$SERVER_DIR" || { echo "❌ Erro ao acessar $SERVER_DIR"; exit 1; }
+
+            # Baixar o arquivo do servidor
+            wget -O server.jar "${versions[$versao_escolhida]}" || {
+                echo "❌ Falha ao baixar o server.jar"
+                exit 1
+            }
+
+            echo "eula=true" > eula.txt
+            echo "✅ Instalação da versão $versao_escolhida concluída!"
+        else
+            echo "❌ Opção inválida. Operação abortada."
+        fi
+        ;;
 
     2)
-	"$HOME/start.sh"
-	;;
+        if [ -f "$HOME/start.sh" ]; then
+            echo "🚀 Iniciando servidor..."
+            bash "$HOME/start.sh"
+        else
+            echo "❌ Arquivo start.sh não encontrado em $HOME"
+        fi
+        ;;
+
 
     3)
         if [[ -f "$SERVER_DIR/server.jar" ]]; then
