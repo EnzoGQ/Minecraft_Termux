@@ -56,9 +56,9 @@ while true; do
     echo ""
     echo "==== MENU ===="
     echo "1) Instalar novo servidor"
-	echo "2) Iniciar servidor"
+    echo "2) Iniciar servidor"
     echo "3) Atualizar server.jar"
-    echo "4) Excluir servidor"
+    echo "4) Excluir mapa do servidor"
     echo "5) Sair"
     echo -n "Escolha uma opção: "
     read op
