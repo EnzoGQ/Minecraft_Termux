@@ -135,36 +135,36 @@ while true; do
 
     case "$op" in
     1)
-	echo ""
-	echo "📥 Selecione a versão do servidor Minecraft:"
-	
-	# Listar opções numeradas manualmente
-	echo "0) Cancelar"
-	i=1
-	declare -a opcoes
-	for ver in "${!versions[@]}"; do
-	    echo "$i) $ver"
-	    opcoes[$i]="$ver"
-	    ((i++))
-	done
-	
-	# Ler opção do usuário
-	read -p "Digite o número da versão desejada: " escolha
-	
-	# Verificar entrada
-	if [[ "$escolha" == "0" ]]; then
-	    echo "❌ Instalação cancelada."
-	elif [[ "$escolha" =~ ^[0-9]+$ ]] && [[ "$escolha" -gt 0 && "$escolha" -lt "$i" ]]; then
-	    versao_escolhida="${opcoes[$escolha]}"
-	    echo "✅ Baixando servidor da versão: $versao_escolhida"
-	
-	    mkdir -p "$SERVER_DIR"
-	    cd "$SERVER_DIR" || exit 1
-	    wget -O server.jar "${versions[$versao_escolhida]}"
-	    echo "eula=true" > eula.txt
-	else
-	    echo "❌ Opção inválida. Operação abortada."
-	fi
+		echo ""
+		echo "📥 Selecione a versão do servidor Minecraft:"
+		
+		# Listar opções numeradas manualmente
+		echo "0) Cancelar"
+		i=1
+		declare -a opcoes
+		for ver in "${!versions[@]}"; do
+		    echo "$i) $ver"
+		    opcoes[$i]="$ver"
+		    ((i++))
+		done
+		
+		# Ler opção do usuário
+		read -p "Digite o número da versão desejada: " escolha
+		
+		# Verificar entrada
+		if [[ "$escolha" == "0" ]]; then
+		    echo "❌ Instalação cancelada."
+		elif [[ "$escolha" =~ ^[0-9]+$ ]] && [[ "$escolha" -gt 0 && "$escolha" -lt "$i" ]]; then
+		    versao_escolhida="${opcoes[$escolha]}"
+		    echo "✅ Baixando servidor da versão: $versao_escolhida"
+		
+		    mkdir -p "$SERVER_DIR"
+		    cd "$SERVER_DIR" || exit 1
+		    wget -O server.jar "${versions[$versao_escolhida]}"
+		    echo "eula=true" > eula.txt
+		else
+		    echo "❌ Opção inválida. Operação abortada."
+		fi
 
     2)
 	"$HOME/start.sh"
