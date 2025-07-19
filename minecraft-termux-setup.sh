@@ -41,6 +41,7 @@ else
 
     instalar_pacote wget wget
     instalar_pacote zip zip
+    instalar_pacote nano nano
 
     # Instalar Java apenas se necessário ou com versão incorreta
     if verificar_java_versao; then
