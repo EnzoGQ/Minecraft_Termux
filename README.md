@@ -20,7 +20,7 @@ pkg install -y wget
 ### Opção 1: Passo a passo
 
 ```bash
-wget https://raw.githubusercontent.com/EnzoGQ/Minecraft_Termux/main/minecraft-termux-setup.sh
+wget https://raw.githubusercontent.com/EnzoGQ/Minecraft_Termux/refs/heads/main/minecraft-termux-setup.sh
 chmod +x minecraft-termux-setup.sh
 ./minecraft-termux-setup.sh
 ```
@@ -28,7 +28,7 @@ chmod +x minecraft-termux-setup.sh
 ### Opção 2: Comando único (automático)
 
 ```bash
-wget https://raw.githubusercontent.com/EnzoGQ/Minecraft_Termux/main/minecraft-termux-setup.sh -O minecraft-termux-setup.sh && chmod +x minecraft-termux-setup.sh && ./minecraft-termux-setup.sh
+wget https://raw.githubusercontent.com/EnzoGQ/Minecraft_Termux/refs/heads/main/minecraft-termux-setup.sh -O minecraft-termux-setup.sh && chmod +x minecraft-termux-setup.sh && ./minecraft-termux-setup.sh
 ```
 
 ### ▶ Como iniciar o servidor
