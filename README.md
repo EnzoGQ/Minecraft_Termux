@@ -1,4 +1,4 @@
-# Minecraft Server no Termux (Android)
+# Minecraft Server no Termux (Android) VERSÃO 1.21.6
 
 Este projeto permite instalar e rodar um servidor **Minecraft Vanilla** no seu **Android** usando o **Termux** de forma automatizada.
 
