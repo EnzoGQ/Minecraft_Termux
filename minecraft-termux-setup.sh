@@ -10,6 +10,20 @@ pkg install -y openjdk-21
 # Ativar acesso ao armazenamento (exige confirmação do usuário)
 termux-setup-storage
 
+# Criar start.sh
+cd ~/
+cat <<EOF > start.sh
+#!/data/data/com.termux/files/usr/bin/bash
+
+RED='\\033[0;31m'
+NC='\\033[0m'
+
+echo -e "\\n\${RED}Iniciando servidor no diretório:\${NC} $SERVER_DIR"
+cd "$SERVER_DIR"
+java -jar server.jar nogui
+EOF
+
+chmod +x start.sh
 # Diretório onde o servidor será instalado
 SERVER_DIR="$HOME/storage/shared/ServidorMinecraft"
 mkdir -p "$SERVER_DIR"
@@ -44,9 +58,8 @@ while true; do
     echo "1) Instalar novo servidor"
 	echo "2) Iniciar servidor"
     echo "3) Atualizar server.jar"
-    echo "4) Fazer backup do servidor"
-    echo "5) Excluir servidor"
-    echo "0) Sair"
+    echo "4) Excluir servidor"
+    echo "5) Sair"
     echo -n "Escolha uma opção: "
     read op
 
@@ -70,7 +83,7 @@ while true; do
             fi
         done
         ;;
-    2)
+	2)
 		"$HOME/start.sh"
 		;;
 
@@ -99,41 +112,26 @@ while true; do
         fi
         ;;
 
-    4)
-	echo -e "${RED}Tem certeza que deseja excluir o mapa atual? Isso não poderá ser desfeito.${NC}"
-	read -p "Digite 'SIM' para confirmar: " confirm
-	if [ "$confirm" = "SIM" ]; then
-	  cd "$SERVER_DIR"
-	  rm -rf world world_nether world_the_end
-	  echo "🗑️  Mapa removido com sucesso!"
-	else
-	  echo "❌ Operação cancelada."
-	fi
-	;;
-    5)
-	echo "Saindo..."
-	exit 0
-	;;
-    *)
-	echo "❌ Opção inválida."
-	;;
-    esac
+	4)
+	    echo -e "${RED}Tem certeza que deseja excluir o mapa atual? Isso não poderá ser desfeito.${NC}"
+		read -p "Digite 'SIM' para confirmar: " confirm
+		if [ "$confirm" = "SIM" ]; then
+		  cd "$SERVER_DIR"
+		  rm -rf world world_nether world_the_end
+		  echo "🗑️  Mapa removido com sucesso!"
+		else
+		  echo "❌ Operação cancelada."
+		fi
+		;;
+	5)
+		echo "Saindo..."
+		exit 0
+		;;
+	*)
+		echo "❌ Opção inválida."
+		;;
+	esac
 done
-
-# Criar start.sh
-cd ~/
-cat <<EOF > start.sh
-#!/data/data/com.termux/files/usr/bin/bash
-
-RED='\\033[0;31m'
-NC='\\033[0m'
-
-echo -e "\\n\${RED}Iniciando servidor no diretório:\${NC} $SERVER_DIR"
-cd "$SERVER_DIR"
-java -jar server.jar nogui
-EOF
-
-chmod +x start.sh
 
 echo ""
 echo "✅ Script concluído."
