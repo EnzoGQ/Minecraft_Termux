@@ -25,7 +25,7 @@ chmod +x minecraft-termux-setup.sh
 ./minecraft-termux-setup.sh
 ```
 
-### Opção 2: Comando único (automático)
+### Opção 2: Comando único (automático) (RECOMENDADO)
 
 ```bash
 wget https://raw.githubusercontent.com/EnzoGQ/Minecraft_Termux/refs/heads/main/minecraft-termux-setup.sh -O minecraft-termux-setup.sh && chmod +x minecraft-termux-setup.sh && ./minecraft-termux-setup.sh
