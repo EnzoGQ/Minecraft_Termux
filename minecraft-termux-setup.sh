@@ -49,4 +49,4 @@ chmod +x start.sh
 echo ""
 echo "✅ Servidor instalado com sucesso!"
 echo "➡ Arquivos visíveis em: $SERVER_DIR"
-echo "➡ Para iniciar, vá até a pasta e execute: ./start.sh"
+echo "➡ Para iniciar: ./start.sh"
