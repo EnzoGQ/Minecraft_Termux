@@ -2,12 +2,16 @@
 
 Este projeto permite instalar e rodar um servidor **Minecraft Vanilla** no seu **Android** usando o **Termux** de forma automatizada.
 
+
 ---
 
 ## ✅ Requisitos
-
 - Android com Termux instalado (recomenda-se a versão da F-Droid ou GitHub)
 - Acesso ao armazenamento interno habilitado
+- Termux wget
+```bash
+pkg install -y wget
+```
 
 ---
 
