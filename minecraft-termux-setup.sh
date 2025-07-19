@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/bin/bash
 
 # Atualizar Termux e instalar pacotes necessários
 pkg update -y && pkg upgrade -y
