@@ -6,6 +6,7 @@ pkg install -y wget
 
 # Instalar OpenJDK 21
 pkg install -y openjdk-21
+pkg install -y zip
 
 # Ativar acesso ao armazenamento (exige confirmação do usuário)
 termux-setup-storage
