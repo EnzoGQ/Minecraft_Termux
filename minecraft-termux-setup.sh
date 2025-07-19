@@ -70,9 +70,9 @@ while true; do
             fi
         done
         ;;
-	2)
+    2)
 		"$HOME/start.sh"
-		;;)
+		;;
 
     3)
         if [[ -f "$SERVER_DIR/server.jar" ]]; then
@@ -99,25 +99,25 @@ while true; do
         fi
         ;;
 
-	4)
-	    echo -e "${RED}Tem certeza que deseja excluir o mapa atual? Isso não poderá ser desfeito.${NC}"
-		read -p "Digite 'SIM' para confirmar: " confirm
-		if [ "$confirm" = "SIM" ]; then
-		  cd "$SERVER_DIR"
-		  rm -rf world world_nether world_the_end
-		  echo "🗑️  Mapa removido com sucesso!"
-		else
-		  echo "❌ Operação cancelada."
-		fi
-		;;
-	5)
-		echo "Saindo..."
-		exit 0
-		;;
-	*)
-		echo "❌ Opção inválida."
-		;;
-	esac
+    4)
+	echo -e "${RED}Tem certeza que deseja excluir o mapa atual? Isso não poderá ser desfeito.${NC}"
+	read -p "Digite 'SIM' para confirmar: " confirm
+	if [ "$confirm" = "SIM" ]; then
+	  cd "$SERVER_DIR"
+	  rm -rf world world_nether world_the_end
+	  echo "🗑️  Mapa removido com sucesso!"
+	else
+	  echo "❌ Operação cancelada."
+	fi
+	;;
+    5)
+	echo "Saindo..."
+	exit 0
+	;;
+    *)
+	echo "❌ Opção inválida."
+	;;
+    esac
 done
 
 # Criar start.sh
