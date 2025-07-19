@@ -129,6 +129,7 @@ while true; do
     echo "3) Atualizar server.jar"
     echo "4) Excluir mapa do servidor"
     echo "5) Backup do servidor"
+    echo "6) Editar configurações do servidor"
     echo "0) Sair"
     echo -n "Escolha uma opção: "
     read op
@@ -226,7 +227,16 @@ while true; do
 		fi
 		;;
 	5) fazer_backup ;;
- 	
+ 	6)
+	        if [ -f "$SERVER_DIR/server.properties" ]; then
+	            echo "🛠 Abrindo server.properties para edição..."
+	            nano "$SERVER_DIR/server.properties"
+	        else
+	            echo "⚠ O arquivo server.properties ainda não foi gerado."
+	            echo "💡 Inicie o servidor pelo menos uma vez para que ele crie o arquivo automaticamente."
+	        fi
+	        ;;
+
  	0)
 		echo "Saindo..."
 		exit 0
