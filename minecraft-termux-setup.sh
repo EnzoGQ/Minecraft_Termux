@@ -1,12 +1,59 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-# Atualizar Termux e instalar pacotes necessários
-pkg update -y && pkg upgrade -y
-pkg install -y wget
+FLAG_FILE="$HOME/.pacotes_instalados"
+JAVA_REQUIRED_VERSION="21"
 
-# Instalar OpenJDK 21
-pkg install -y openjdk-21
-pkg install -y zip
+# Função para verificar versão do Java
+verificar_java_versao() {
+    if ! command -v java >/dev/null 2>&1; then
+        echo "❌ Java não está instalado."
+        return 1
+    fi
+
+    # Captura a versão principal do Java (ex: 21 do 21.0.2)
+    JAVA_VERSAO=$(java -version 2>&1 | grep "version" | grep -oP '"\K[0-9]+')
+    
+    if [ "$JAVA_VERSAO" -ge "$JAVA_REQUIRED_VERSION" ]; then
+        echo "✅ Java versão $JAVA_VERSAO detectada (requerido: $JAVA_REQUIRED_VERSION+)."
+        return 0
+    else
+        echo "⚠ Java versão $JAVA_VERSAO detectada. Requer Java $JAVA_REQUIRED_VERSION ou superior."
+        return 1
+    fi
+}
+
+# Instalação só se ainda não foi feita
+if [ -f "$FLAG_FILE" ]; then
+    echo "✅ Pacotes já foram instalados anteriormente. Pulando esta etapa."
+else
+    echo "📦 Atualizando Termux e instalando pacotes necessários..."
+    pkg update -y && pkg upgrade -y
+
+    # Função para instalar um pacote se ele ainda não estiver instalado
+    instalar_pacote() {
+        if command -v "$1" > /dev/null 2>&1; then
+            echo "✅ $1 já está instalado."
+        else
+            echo "📥 Instalando $2..."
+            pkg install -y "$2"
+        fi
+    }
+
+    instalar_pacote wget wget
+    instalar_pacote zip zip
+
+    # Instalar Java apenas se necessário ou com versão incorreta
+    if verificar_java_versao; then
+        echo "✅ Java já está na versão correta."
+    else
+        echo "📥 Instalando OpenJDK 21..."
+        pkg install -y openjdk-21
+    fi
+
+    touch "$FLAG_FILE"
+    echo "✅ Instalação dos pacotes concluída e registrada."
+fi
+
 
 # Ativar acesso ao armazenamento (exige confirmação do usuário)
 termux-setup-storage
@@ -49,8 +96,16 @@ fazer_backup() {
 
 # Diretório onde o servidor será instalado
 SERVER_DIR="$HOME/storage/shared/ServidorMinecraft"
-mkdir -p "$SERVER_DIR"
-cd "$SERVER_DIR"
+
+if [ -d "$SERVER_DIR" ]; then
+    echo "✅ Diretório do servidor já existe: $SERVER_DIR"
+else
+    echo "📁 Criando diretório do servidor em: $SERVER_DIR"
+    mkdir -p "$SERVER_DIR"
+fi
+
+cd "$SERVER_DIR" || { echo "❌ Erro ao acessar $SERVER_DIR"; exit 1; }
+
 
 # Lista de versões
 declare -A versions
