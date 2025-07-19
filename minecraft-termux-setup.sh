@@ -23,6 +23,9 @@ wget https://piston-data.mojang.com/v1/objects/6e64dcabba3c01a7271b4fa6bd898483b
 # Aceitar EULA
 echo "eula=true" > eula.txt
 
+# Voltar a base para criar o start.sh
+cd ~/
+
 # Criar start.sh dentro da mesma pasta
 cat <<EOF > start.sh
 #!/data/data/com.termux/files/usr/bin/bash
