@@ -15,4 +15,20 @@ Este projeto permite instalar e rodar um servidor **Minecraft Vanilla** no seu *
 
 ### Opção 1: Passo a passo
 
-```wget https://raw.githubusercontent.com/EnzoGQ/Minecraft_Termux/main/minecraft-termux-setup.sh -O minecraft-termux-setup.sh && chmod +x minecraft-termux-setup.sh && ./minecraft-termux-setup.sh
+```bash
+wget https://raw.githubusercontent.com/EnzoGQ/Minecraft_Termux/main/minecraft-termux-setup.sh
+chmod +x minecraft-termux-setup.sh
+./minecraft-termux-setup.sh
+```
+
+### Opção 2: Comando único (automático)
+
+```bash
+wget https://raw.githubusercontent.com/EnzoGQ/Minecraft_Termux/main/minecraft-termux-setup.sh -O minecraft-termux-setup.sh && chmod +x minecraft-termux-setup.sh && ./minecraft-termux-setup.sh
+```
+
+### ▶ Como iniciar o servidor
+
+```bash
+./start.sh
+
