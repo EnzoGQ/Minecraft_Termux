@@ -24,6 +24,27 @@ java -jar server.jar nogui
 EOF
 
 chmod +x start.sh
+
+fazer_backup() {
+    if [ ! -d "$HOME/meu_servidor" ]; then
+        echo -e "\n\033[31mA pasta do servidor não foi encontrada.\033[0m"
+        return
+    fi
+
+    mkdir -p "$HOME/backups"
+    DATA=$(date +"%Y-%m-%d_%H-%M-%S")
+    BACKUP_PATH="$HOME/backups/backup_$DATA.zip"
+
+    echo -e "\n\033[32mGerando backup...\033[0m"
+    zip -r "$BACKUP_PATH" "$HOME/meu_servidor" > /dev/null
+
+    if [ $? -eq 0 ]; then
+        echo -e "\033[32mBackup criado com sucesso em:\033[0m $BACKUP_PATH"
+    else
+        echo -e "\033[31mFalha ao criar o backup.\033[0m"
+    fi
+}
+
 # Diretório onde o servidor será instalado
 SERVER_DIR="$HOME/storage/shared/ServidorMinecraft"
 mkdir -p "$SERVER_DIR"
@@ -41,7 +62,8 @@ while true; do
     echo "2) Iniciar servidor"
     echo "3) Atualizar server.jar"
     echo "4) Excluir mapa do servidor"
-    echo "5) Sair"
+    echo "5) Backup do servidor"
+    echo "0) Sair"
     echo -n "Escolha uma opção: "
     read op
 
@@ -105,7 +127,9 @@ while true; do
 		  echo "❌ Operação cancelada."
 		fi
 		;;
-	5)
+	5) fazer_backup ;;
+ 	
+ 	0)
 		echo "Saindo..."
 		exit 0
 		;;
