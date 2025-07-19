@@ -46,6 +46,7 @@ Você verá o seguinte menu:
 3) Atualizar server.jar
 4) Excluir mapa do servidor
 5) Backup do servidor
+6) Editar server.properties
 
 1) Instalar novo servidor
 Faz a instalação inicial do servidor Minecraft Vanilla.
@@ -62,3 +63,5 @@ Apaga o mundo salvo atual para começar um mapa novo.
 5) Backup do servidor
 Faz um backup do diretório do servidor, incluindo mundo, configurações e arquivos.
 
+6) Editar server.properties
+Irá abrir o server.properties para editar.
