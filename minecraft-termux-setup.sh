@@ -35,12 +35,6 @@ NC='\\033[0m' # Sem cor
 echo -e "\\n\${RED}Iniciando servidor no diretório:\${NC} $SERVER_DIR"
 cd "$SERVER_DIR"
 
-# Detecta IP local real (não 127.0.0.1)
-IP=$(ip addr | grep 'inet ' | grep -v '127.0.0.1' | awk '{print $2}' | cut -d/ -f1 | head -n 1)
-
-# Exibe IP
-echo -e "\n${RED}Endereço IP local:${NC} $IP\n"
-
 # Iniciar o servidor
 java -jar server.jar nogui
 EOF
