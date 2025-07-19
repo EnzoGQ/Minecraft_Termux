@@ -26,24 +26,25 @@ EOF
 chmod +x start.sh
 
 fazer_backup() {
-    if [ ! -d "$HOME/meu_servidor" ]; then
-        echo -e "\n\033[31mA pasta do servidor não foi encontrada.\033[0m"
+    if [ ! -d "$SERVER_DIR" ]; then
+        echo "⚠ Diretório do servidor não encontrado: $SERVER_DIR"
         return
     fi
 
-    mkdir -p "$HOME/backups"
-    DATA=$(date +"%Y-%m-%d_%H-%M-%S")
-    BACKUP_PATH="$HOME/backups/backup_$DATA.zip"
+    mkdir -p "$SERVER_DIR/backups"
+    local data=$(date +"%Y-%m-%d_%H-%M-%S")
+    local arquivo_backup="$SERVER_DIR/backups/ServidorMinecraft_backup_$data.zip"
 
-    echo -e "\n\033[32mGerando backup...\033[0m"
-    zip -r "$BACKUP_PATH" "$HOME/meu_servidor" > /dev/null
+    echo "Criando backup em $arquivo_backup ..."
+    zip -r "$arquivo_backup" "$SERVER_DIR" > /dev/null
 
     if [ $? -eq 0 ]; then
-        echo -e "\033[32mBackup criado com sucesso em:\033[0m $BACKUP_PATH"
+        echo "✅ Backup criado com sucesso!"
     else
-        echo -e "\033[31mFalha ao criar o backup.\033[0m"
+        echo "❌ Erro ao criar backup."
     fi
 }
+
 
 # Diretório onde o servidor será instalado
 SERVER_DIR="$HOME/storage/shared/ServidorMinecraft"
